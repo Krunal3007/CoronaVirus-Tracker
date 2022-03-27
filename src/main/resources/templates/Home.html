@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<title>CoronaVirus Tracker</title>
+
+
+<style type="text/css">
+table td:empty::before {
+	content: "------"
+}
+</style>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="my-5 p-3 bg-secondary text-white">
+			<h1 class="text-center ">CoronaVirus Tracker</h1>
+
+		</div>
+		<div class="jumbotron">
+			<p class="mb-5 h4">This application lists the current number of
+				cases reported across the globe</p>
+			<h1 class="display-4 " th:text="${totalReportedCases}"></h1>
+			<p class="lead">Total cases reported</p>
+
+			<hr class="my-4">
+
+			<h1 class="display-4 " th:text="${totalTodayCases}"></h1>
+			<p class="lead ">Total cases reported today</p>
+
+		</div>
+
+
+		<table id="tb" class="table table-striped">
+			<tr>
+				<th>Country</th>
+				<th>State</th>
+				<th>Total Cases</th>
+				<th>Changes since last day</th>
+			</tr>
+			<tr th:each="l : ${locationStats}">
+				<td th:text="${l.country}"></td>
+				<td th:text="${l.state}"></td>
+				<td th:text="${l.latestTotalCases}">0</td>
+				<td th:text="${l.diffFromPreviousDay}">0</td>
+			</tr>
+			
+		</table>
+	</div>
+
+
+
+
+
+	<script type="text/javascript">
+			$(document).ready(function() {
+				$('#tb').DataTable();
+			});
+		</script>
+</body>
+</html>
